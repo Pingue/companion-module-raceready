@@ -1,3 +1,3 @@
-# companion-module-[replace with module name]
+# companion-module-raceready
 
-See [HELP.md](./companion/HELP.md) and [LICENSE](./LICENSE)
+Bitfocus companion plugin for https://github.com/Pingue/raceready

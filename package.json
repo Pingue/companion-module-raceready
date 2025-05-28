@@ -1,5 +1,5 @@
 {
-	"name": "your-module-name",
+	"name": "raceready",
 	"version": "0.1.0",
 	"main": "main.js",
 	"scripts": {
@@ -12,7 +12,8 @@
 		"url": "git+https://github.com/bitfocus/companion-module-your-module-name.git"
 	},
 	"dependencies": {
-		"@companion-module/base": "~1.11.2"
+		"@companion-module/base": "~1.11.2",
+		"socket.io-client": "^4.8.1"
 	},
 	"devDependencies": {
 		"@companion-module/tools": "^2.1.1",

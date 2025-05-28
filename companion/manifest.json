@@ -1,16 +1,16 @@
 {
-	"id": "your-module-name",
-	"name": "your-module-name",
-	"shortname": "module-shortname",
-	"description": "A short one line description of your module",
+	"id": "raceready",
+	"name": "raceready",
+	"shortname": "raceready",
+	"description": "Companion module for Raceready, a simple realtime 'Go/NoGo' checklist for productions",
 	"version": "0.0.0",
 	"license": "MIT",
 	"repository": "git+https://github.com/bitfocus/companion-module-your-module-name.git",
 	"bugs": "https://github.com/bitfocus/companion-module-your-module-name/issues",
 	"maintainers": [
 		{
-			"name": "Your name",
-			"email": "Your email"
+			"name": "Mike Frost",
+			"email": "me@mfrost.co.uk"
 		}
 	],
 	"runtime": {
@@ -20,7 +20,7 @@
 		"entrypoint": "../main.js"
 	},
 	"legacyIds": [],
-	"manufacturer": "Your company",
-	"products": ["Your product"],
+	"manufacturer": "MFTS",
+	"products": ["Raceready"],
 	"keywords": []
 }
