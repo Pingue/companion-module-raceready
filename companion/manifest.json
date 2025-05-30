@@ -5,8 +5,8 @@
 	"description": "Companion module for Raceready, a simple realtime 'Go/NoGo' checklist for productions",
 	"version": "0.0.0",
 	"license": "MIT",
-	"repository": "git+https://github.com/bitfocus/companion-module-your-module-name.git",
-	"bugs": "https://github.com/bitfocus/companion-module-your-module-name/issues",
+	"repository": "git+https://github.com/Pingue/companion-module-raceready.git",
+	"bugs": "https://github.com/Pingue/companion-module-raceready/issues",
 	"maintainers": [
 		{
 			"name": "Mike Frost",
