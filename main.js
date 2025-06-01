@@ -47,14 +47,17 @@ class ModuleInstance extends InstanceBase {
 			this.socket.on('connect', () => {
 				this.log('info', `Connected to WebSocket at ${url}`)
 				this.socket.emit('request_all_data')
+				this.updateStatus(InstanceStatus.Ok) // Set status to OK when connected
 			})
 
 			this.socket.on('disconnect', () => {
 				this.log('warn', `Disconnected from WebSocket at ${url}`)
+				this.updateStatus(InstanceStatus.Disconnected) // Update status to disconnected
 			})
 
 			this.socket.on('connect_error', (error) => {
 				this.log('error', `WebSocket connection error: ${error.message}`)
+				this.updateStatus(InstanceStatus.Error, 'Connection failed. Check IP/Port configuration.') // Update status to error
 				})
 
 			// Trigger feedback updates based on WebSocket events
@@ -80,6 +83,7 @@ class ModuleInstance extends InstanceBase {
 			})
 		} else {
 			this.log('warn', 'Host or port not configured. WebSocket connection not established.')
+			this.updateStatus(InstanceStatus.BadConfig, 'Host or port not configured.') // Update status to bad config
 		}
 	}
 
