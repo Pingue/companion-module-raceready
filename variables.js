@@ -1,34 +1,10 @@
 module.exports = function (self) {
-	self.setVariableDefinitions([
-		{ variableId: 'actiontext1', name: 'Text for action with ID 1' },
-		{ variableId: 'actiontext2', name: 'Text for action with ID 2' },
-		{ variableId: 'actiontext3', name: 'Text for action with ID 3' },
-		{ variableId: 'actiontext4', name: 'Text for action with ID 4' },
-		{ variableId: 'actiontext5', name: 'Text for action with ID 5' },
-		{ variableId: 'actiontext6', name: 'Text for action with ID 6' },
-		{ variableId: 'actiontext7', name: 'Text for action with ID 7' },
-		{ variableId: 'actiontext8', name: 'Text for action with ID 8' },
-		{ variableId: 'actiontext9', name: 'Text for action with ID 9' },
-		{ variableId: 'actiontext10', name: 'Text for action with ID 10' },
-		{ variableId: 'actiontext11', name: 'Text for action with ID 11' },
-		{ variableId: 'actiontext12', name: 'Text for action with ID 12' },
-		{ variableId: 'actiontext13', name: 'Text for action with ID 13' },
-		{ variableId: 'actiontext14', name: 'Text for action with ID 14' },
-		{ variableId: 'actiontext15', name: 'Text for action with ID 15' },
-		{ variableId: 'actiontext16', name: 'Text for action with ID 16' },
-		{ variableId: 'actiontext17', name: 'Text for action with ID 17' },
-		{ variableId: 'actiontext18', name: 'Text for action with ID 18' },
-		{ variableId: 'actiontext19', name: 'Text for action with ID 19' },
-		{ variableId: 'actiontext20', name: 'Text for action with ID 20' },
-		{ variableId: 'actiontext21', name: 'Text for action with ID 21' },
-		{ variableId: 'actiontext22', name: 'Text for action with ID 22' },
-		{ variableId: 'actiontext23', name: 'Text for action with ID 23' },
-		{ variableId: 'actiontext24', name: 'Text for action with ID 24' },
-		{ variableId: 'actiontext25', name: 'Text for action with ID 25' },
-		{ variableId: 'actiontext26', name: 'Text for action with ID 26' },
-		{ variableId: 'actiontext27', name: 'Text for action with ID 27' },
-		{ variableId: 'actiontext28', name: 'Text for action with ID 28' },
-		{ variableId: 'actiontext29', name: 'Text for action with ID 29' },
-		{ variableId: 'actiontext30', name: 'Text for action with ID 30' },
-	])
+	const variables = []
+	
+	// Checklist-related variables
+	variables.push({ variableId: 'current_checklist_name', name: 'Name of the current checklist' })
+	variables.push({ variableId: 'current_checklist_index', name: 'Index of the current checklist (0-based)' })
+	variables.push({ variableId: 'total_checklists', name: 'Total number of checklists' })
+	
+	self.setVariableDefinitions(variables)
 }
