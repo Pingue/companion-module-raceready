@@ -73,12 +73,10 @@ class ModuleInstance extends InstanceBase {
 
 			// Handle specific events for checklist management
 			this.socket.on('checklists', (data) => {
-				this.log('info', `Received checklists: ${JSON.stringify(data)}`)
 				this.processChecklistsData(data)
 			})
 
 			this.socket.on('current_checklist', (data) => {
-				this.log('info', `Received current checklist: ${JSON.stringify(data)}`)
 				this.currentChecklistId = data.current_checklist_id
 				// Request fresh data when checklist changes
 				this.socket.emit('request_all_data')
@@ -87,12 +85,10 @@ class ModuleInstance extends InstanceBase {
 			})
 
 			this.socket.on('all_data', (data) => {
-				this.log('info', `Received all_data: ${JSON.stringify(data)}`)
 				this.processAllData(data)
 			})
 
 			this.socket.on('partial_data', (data) => {
-				this.log('info', `Received partial_data: ${JSON.stringify(data)}`)
 				this.processPartialData(data)
 			})
 
@@ -130,16 +126,16 @@ class ModuleInstance extends InstanceBase {
 		// Clear existing checklist actions
 		this.checklistActions = {}
 		
-		this.log('info', `Processing all_data with ${data.length} actions`)
+		//this.log('info', `Processing all_data with ${JSON.stringify(data)}`)
 		
 		// Infer current checklist from the data
-		if (data.length > 0) {
-			this.currentChecklistId = data[0].checklist_id
+		if (data.actions.length > 0) {
+			this.currentChecklistId = data.current_checklist_id
 			this.log('info', `Current checklist ID: ${this.currentChecklistId}`)
 		}
 		
 		// Process each action and organize by checklist_id and normalised_index
-		data.forEach(action => {
+		data.actions.forEach(action => {
 			const checklistId = action.checklist_id
 			const normalisedIndex = action.normalised_index
 			
@@ -169,7 +165,7 @@ class ModuleInstance extends InstanceBase {
 	
 	processPartialData(data) {
 		// Process partial data updates for individual actions
-		data.forEach(action => {
+		data.actions.forEach(action => {
 			const checklistId = action.checklist_id
 			const normalisedIndex = action.normalised_index
 			
@@ -206,7 +202,6 @@ class ModuleInstance extends InstanceBase {
 		variables['current_checklist_name'] = this.getCurrentChecklistName()
 		variables['current_checklist_index'] = this.getCurrentChecklistIndex()
 		variables['total_checklists'] = this.checklists.length
-		
 		// Add position-based action text variables for current checklist
 		if (this.currentChecklistId && this.checklistActions[this.currentChecklistId]) {
 			const currentActions = this.checklistActions[this.currentChecklistId]
