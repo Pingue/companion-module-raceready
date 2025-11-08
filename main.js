@@ -96,7 +96,7 @@ class ModuleInstance extends InstanceBase {
 			this.socket.onAny((event, ...args) => {
 				// Handle legacy format for backwards compatibility during transition
 				if (event !== 'checklists' && event !== 'current_checklist' && event !== 'all_data' && event !== 'partial_data') {
-					//this.log('info', `Received event: ${event}, Data: ${JSON.stringify(args)}`)
+					this.log('debug', `Received event: ${event}, Data: ${JSON.stringify(args)}`)
 					for (const key in args[0]) {
 						var actionid = args[0][key]["id"]
 						if (actionid === undefined) {
@@ -123,15 +123,16 @@ class ModuleInstance extends InstanceBase {
 	}
 
 	processAllData(data) {
+		this.log('debug', `All data`)
 		// Clear existing checklist actions
 		this.checklistActions = {}
 		
-		//this.log('info', `Processing all_data with ${JSON.stringify(data)}`)
+		this.log('debug', `Processing all_data with ${JSON.stringify(data)}`)
 		
 		// Infer current checklist from the data
 		if (data.actions.length > 0) {
 			this.currentChecklistId = data.current_checklist_id
-			this.log('info', `Current checklist ID: ${this.currentChecklistId}`)
+			this.log('debug', `Current checklist ID: ${this.currentChecklistId}`)
 		}
 		
 		// Process each action and organize by checklist_id and normalised_index
@@ -154,7 +155,7 @@ class ModuleInstance extends InstanceBase {
 		
 		// Request checklist names if we don't have them
 		if (this.checklists.length === 0) {
-			this.log('info', 'Requesting checklists data')
+			this.log('debug', 'Requesting checklists data')
 			this.socket.emit('get_checklists')
 		}
 		
@@ -164,14 +165,17 @@ class ModuleInstance extends InstanceBase {
 	}
 	
 	processPartialData(data) {
+		this.log('debug', `Partial data`)
+		this.log('debug', `Data: ${JSON.stringify(data)}`)
 		// Process partial data updates for individual actions
-		data.actions.forEach(action => {
+		data.forEach(action => {
+
 			const checklistId = action.checklist_id
 			const normalisedIndex = action.normalised_index
 			
 			// Update current checklist ID if we don't have one or if it's different
 			if (!this.currentChecklistId || this.currentChecklistId !== checklistId) {
-				this.log('info', `Updating current checklist from partial_data: ${this.currentChecklistId} -> ${checklistId}`)
+				this.log('debug', `Updating current checklist from partial_data: ${this.currentChecklistId} -> ${checklistId}`)
 				this.currentChecklistId = checklistId
 			}
 			
@@ -196,6 +200,7 @@ class ModuleInstance extends InstanceBase {
 	}
 	
 	updateChecklistVariables() {
+		this.log('debug', `Checklist vars`)
 		const variables = {}
 		
 		// Add checklist info variables
@@ -258,7 +263,7 @@ class ModuleInstance extends InstanceBase {
 	processChecklistsData(data) {
 		if (data && Array.isArray(data)) {
 			this.checklists = data
-			this.log('info', `Loaded ${data.length} checklists`)
+			this.log('debug', `Loaded ${data.length} checklists`)
 		} else {
 			this.log('warn', `Unexpected checklists data format: ${JSON.stringify(data)}`)
 			this.checklists = []
